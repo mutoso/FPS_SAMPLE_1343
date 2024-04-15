@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Gun : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Gun : MonoBehaviour
     [SerializeField] Transform gunBarrelEnd;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Animator anim;
+    [SerializeField] UnityEvent<int> onAmmoChanged;
 
     // stats
     [SerializeField] int maxAmmo;
@@ -46,6 +48,7 @@ public class Gun : MonoBehaviour
         anim.SetTrigger("shoot");
         timeBetweenShots = 0;
         ammo -= 1;
+        onAmmoChanged.Invoke(ammo);
 
         return true;
     }
@@ -54,4 +57,6 @@ public class Gun : MonoBehaviour
     {
         ammo += amount;
     }
+
+
 }
