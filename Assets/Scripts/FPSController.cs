@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class FPSController : MonoBehaviour
 {
@@ -24,14 +25,15 @@ public class FPSController : MonoBehaviour
     List<Gun> equippedGuns = new List<Gun>();
     int gunIndex = 0;
     Gun currentGun = null;
+    UnityEvent onInteract;
 
     // properties
     public GameObject Cam { get { return cam; } }
     
 
-    private void Awake()
+    void Awake()
     {
-        
+        onInteract = new UnityEvent();
     }
 
     // Start is called before the first frame update
@@ -48,6 +50,7 @@ public class FPSController : MonoBehaviour
     void Update()
     {
         Movement();
+        Interact();
         Look();
 
         FireGun();
@@ -79,6 +82,14 @@ public class FPSController : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    void Interact()
+    {
+        if (Input.GetButtonDown("Interact"))
+        {
+            onInteract.Invoke();
+        }
     }
 
     void Look()
@@ -171,5 +182,15 @@ public class FPSController : MonoBehaviour
             var knockbackAngle = (transform.position - collisionPoint).normalized;
             velocity = (20 * knockbackAngle);
         }
+    }
+
+    public void AddInteractListener(UnityAction action)
+    {
+        onInteract.AddListener(action);
+    }
+
+    public void RemoveInteractListener(UnityAction action)
+    {
+        onInteract.RemoveListener(action);
     }
 }

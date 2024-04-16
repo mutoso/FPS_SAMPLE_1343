@@ -59,6 +59,8 @@ public class Gun : MonoBehaviour
 
         if (ammo > maxAmmo)
             ammo = maxAmmo;
+
+        onAmmoChanged.Invoke(ammo);
     }
 
 
