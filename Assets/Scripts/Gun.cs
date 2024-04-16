@@ -56,6 +56,9 @@ public class Gun : MonoBehaviour
     public void AddAmmo(int amount)
     {
         ammo += amount;
+
+        if (ammo > maxAmmo)
+            ammo = maxAmmo;
     }
 
 
