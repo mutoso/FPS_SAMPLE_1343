@@ -6670,7 +6670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d73ed9908289254c8002c17464a7cf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 2071811436}
 --- !u!135 &529948334
 SphereCollider:
   m_ObjectHideFlags: 0
