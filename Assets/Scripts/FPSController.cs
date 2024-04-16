@@ -10,6 +10,7 @@ public class FPSController : MonoBehaviour
     [SerializeField] GameObject cam;
     [SerializeField] Transform gunHold;
     [SerializeField] Gun initialGun;
+    [SerializeField] UnityEvent onHit;
 
     // stats
     [SerializeField] float movementSpeed = 2.0f;
@@ -181,6 +182,7 @@ public class FPSController : MonoBehaviour
             var collisionPoint = hit.collider.ClosestPoint(transform.position);
             var knockbackAngle = (transform.position - collisionPoint).normalized;
             velocity = (20 * knockbackAngle);
+            onHit.Invoke();
         }
     }
 
@@ -192,5 +194,10 @@ public class FPSController : MonoBehaviour
     public void RemoveInteractListener(UnityAction action)
     {
         onInteract.RemoveListener(action);
+    }
+
+    public void AddHitListener(UnityAction action)
+    {
+        onHit.AddListener(action);
     }
 }

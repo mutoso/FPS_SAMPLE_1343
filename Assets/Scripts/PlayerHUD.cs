@@ -22,4 +22,9 @@ public class PlayerHUD : MonoBehaviour
     {
         currentAmmoText.text = ammo.ToString().PadLeft(2, '0');
     }
+
+    public void LowerHealth()
+    {
+        healthBar.fillAmount -= 0.1f;
+    }
 }
